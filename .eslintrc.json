@@ -1,0 +1,47 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "array-bracket-newline": 2,
+        "array-bracket-spacing": 2,
+        "arrow-parens": 2,
+        "arrow-spacing": 2,
+        "brace-style": 2,
+        "camelcase": 2,
+        "class-methods-use-this": 2,
+        "comma-dangle": [
+            "error",
+            {
+                "objects": "always",
+                "arrays": "never",
+                "imports": "never",
+                "exports": "never",
+                "functions": "never"
+            }
+        ],
+        "comma-spacing": 2,
+        "curly": 2,
+        "eqeqeq": 2,
+        "indent": 2,
+        "jsx-quotes": 2,
+        "key-spacing": 2,
+        "keyword-spacing": 2,
+        "no-unneeded-ternary": 2,
+        "object-curly-newline": 2,
+        "object-curly-spacing": 0,
+        "object-property-newline": 2,
+        "space-in-parens": 2,
+        "spaced-comment": 2,
+        "strict": 2,
+        "semi": 2
+    },
+    "env": {
+        "node": true
+    }
+}

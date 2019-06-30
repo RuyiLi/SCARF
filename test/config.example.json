@@ -1,0 +1,15 @@
+{
+    "token": "Your Token Here",
+    "prefix": "!",
+    "handleEdits": true,
+    "tags": {
+        "hello": {
+            "aliases": [
+                "hey",
+                "hi"
+            ],
+            "content": "Hello, World!"
+        },
+        "foo": "bar"
+    }
+}

@@ -1,0 +1,5 @@
+node_modules/
+dist/
+scarf.code-workspace
+lib/
+test/config.json
