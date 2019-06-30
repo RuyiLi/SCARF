@@ -1,10 +1,11 @@
 {
     "name": "scarf-djs",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A Simple Command And Response Framework for discord.js.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "author": "Ruyi Li",
+    "repository": "https://github.com/RuyiLi/scarf",
     "license": "MIT",
     "files": [
         "lib/**/*"
