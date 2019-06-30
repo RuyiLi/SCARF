@@ -1,5 +1,5 @@
 const config = require('./config.json');
-const { SCARF, } = require('../lib');
+const { SCARF, } = require('../lib'); // Replace `../lib` with `scarf-djs` in your project.
 
 const client = new SCARF(config, {
     disableEveryone: true,

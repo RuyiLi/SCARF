@@ -1,5 +1,9 @@
 import { Client, Message } from 'discord.js';
 
+/**
+ * The SCARF client.
+ * @extends {Client}
+ */
 export class SCARF extends Client {
     public prefix: string;
     public token: string;
@@ -16,25 +20,80 @@ export class SCARF extends Client {
     }, clientOptions: object = {}) {
         super(clientOptions);
 
+        /**
+        * The prefix of the bot.
+        * @type {string}
+        */
         this.prefix = options.prefix || '?';
+
+        /**
+        * The token of the bot.
+        * @type {string}
+        */
         this.token = options.token;
+
+        /**
+        * Represents the tags provided by the user.
+        * A tag may be represented by using the tag name (a string) as the key
+        * and the content as the value, 
+        * or with an object as the value.
+        * The object should contain a required property `content`, 
+        * representing the content of the command
+        * and an optional property `aliases`
+        * representing the alternative names of the tag.
+        * @type {object}
+        */
         this.tags = options.tags;
+
+        /**
+        * Whether or not the bot should handle edited messages.
+        * @type {boolean}
+        */
         this.handleEdits = !!options.handleEdits;
+
+        /**
+        * A Map linking the names and aliases of each tag with their respective contents.
+        * @type {Map<string, string>}
+        */
         this.commands = new Map();
+
+        /**
+        * A Map linking the user's command message with the reponse.
+        * Used for handling edits.
+        * @type {Map<string, string>}
+        */
         this.correspondingMessages = new Map();
     }
 
-    registerTag(name: string, content: string): void {
+    /**
+     * Adds a tag to the commands Map.
+     * Logs a warning if user attempts to register two tags or aliases with the same name.
+     * @param {string} name - The name of the tag.
+     * @param {string} content - The content of the tag.
+     * @returns {void}
+     */
+    private registerTag(name: string, content: string): void {
         if (this.commands.has(name)) {
             return console.log(`[SCARF] [WARN] Duplicate tag name detected. Name of conflicting tag: ${name}`);
         }
         this.commands.set(name, content);
     }
 
+    /**
+     * Detects if a message should be replied to
+     * and responds with the content of the corresponding tag.
+     * Additionally, if the `handleEdits` property is true,
+     * this will edit the message sent by the bot
+     * to reflect the content of the new tag.
+     * @param {Message} msg - The Message object passed by either the message or messageUpdate event.
+     * @param {boolean} edited - Whether the message has been edited. Defaults to false.
+     * @returns {Promise<Message | Message[] | void>}
+     */
     async handleMessage(msg: Message, edited: boolean = false): Promise<Message | Message[] | void> {
-        if (!msg.content.startsWith(this.prefix)) {
+        if (!msg.content.startsWith(this.prefix) || msg.author.bot) {
             return;
         }
+
         const tag = msg.content.toLowerCase().slice(this.prefix.length);
         if (this.commands.has(tag)) {
             const content = this.commands.get(tag);
@@ -48,6 +107,14 @@ export class SCARF extends Client {
         }
     }
 
+
+    /**
+     * Attempts to connect to the API gateway,
+     * registers all tags and their aliases into the `commands` Map,
+     * and listens for message events to pass them to the `handleMessage` 
+     * callback. Returns the token.
+     * @returns {Promise<string>}
+     */
     async setup(): Promise<string> {
         try {
             await super.login(this.token);
