@@ -1,14 +1,14 @@
 {
     "name": "scarf-djs",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "A Simple Command And Response Framework for discord.js.",
-    "main": "src/index.ts",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "author": "Ruyi Li",
     "license": "MIT",
     "files": [
         "lib/**/*"
     ],
-    "types": "lib/index.d.ts",
     "devDependencies": {
         "@types/node": "^12.0.10",
         "@typescript-eslint/eslint-plugin": "^1.11.0",
